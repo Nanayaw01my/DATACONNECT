@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataConnect - Buy Data Bundles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--success);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 1.5rem;
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+
+        .bundles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .bundle-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .bundle-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .bundle-card.popular {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .bundle-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .bundle-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .bundle-data {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .bundle-validity {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .bundle-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .purchase-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-method {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: var(--success);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            .nav-links li {
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-wifi"></i>
+                <span>DataConnect</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> Bundles</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Fast & Affordable Data Bundles</h1>
+            <p>Get connected with our wide range of data bundles tailored to suit your needs. Browse our selection and stay connected!</p>
+            <a href="#bundles" class="btn">View Bundles</a>
+        </section>
+
+        <!-- Data Bundles Section -->
+        <h2 class="section-title" id="bundles">Available Data Bundles</h2>
+        <div class="bundles-container">
+            <!-- Bundle 1 -->
+            <div class="bundle-card">
+                <div class="bundle-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="bundle-name">Social Bundle</h3>
+                <div class="bundle-data">1 GB</div>
+                <div class="bundle-validity">Valid for 7 days</div>
+                <div class="bundle-price">$2.99</div>
+                <button class="btn btn-outline select-bundle" data-bundle="Social Bundle" data-price="2.99">Select Bundle</button>
+            </div>
+
+            <!-- Bundle 2 -->
+            <div class="bundle-card popular">
+                <div class="popular-tag">MOST POPULAR</div>
+                <div class="bundle-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3 class="bundle-name">Standard Bundle</h3>
+                <div class="bundle-data">5 GB</div>
+                <div class="bundle-validity">Valid for 30 days</div>
+                <div class="bundle-price">$9.99</div>
+                <button class="btn select-bundle" data-bundle="Standard Bundle" data-price="9.99">Select Bundle</button>
+            </div>
+
+            <!-- Bundle 3 -->
+            <div class="bundle-card">
+                <div class="bundle-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h3 class="bundle-name">Streaming Bundle</h3>
+                <div class="bundle-data">10 GB</div>
+                <div class="bundle-validity">Valid for 30 days</div>
+                <div class="bundle-price">$15.99</div>
+                <button class="btn btn-outline select-bundle" data-bundle="Streaming Bundle" data-price="15.99">Select Bundle</button>
+            </div>
+
+            <!-- Bundle 4 -->
+            <div class="bundle-card">
+                <div class="bundle-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="bundle-name">Unlimited Bundle</h3>
+                <div class="bundle-data">30 GB</div>
+                <div class="bundle-validity">Valid for 30 days</div>
+                <div class="bundle-price">$24.99</div>
+                <button class="btn btn-outline select-bundle" data-bundle="Unlimited Bundle" data-price="24.99">Select Bundle</button>
+            </div>
+        </div>
+
+        <!-- Purchase Form -->
+        <h2 class="section-title">Purchase Data Bundle</h2>
+        <form class="purchase-form" id="purchaseForm">
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="selectedBundle">Selected Bundle</label>
+                    <input type="text" class="form-control" id="selectedBundle" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="bundlePrice">Price</label>
+                    <input type="text" class="form-control" id="bundlePrice" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Payment Method</label>
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="credit-card">
+                        <i class="far fa-credit-card"></i>
+                        <div>Credit Card</div>
+                    </div>
+                    <div class="payment-method" data-method="paypal">
+                        <i class="fab fa-paypal"></i>
+                        <div>PayPal</div>
+                    </div>
+                    <div class="payment-method" data-method="mobile-money">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>Mobile Money</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Purchase Bundle</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DataConnect</h3>
+                <p>Your trusted partner for affordable and reliable data bundles. Stay connected with our wide range of options tailored to your needs.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Data Bundles</a>
+                <a href="#">Pricing</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Data Street, Tech City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> support@dataconnect.com</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 DataConnect. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Your data bundle has been purchased successfully!
+    </div>
+
+    <script>
+        // Bundle Selection
+        document.querySelectorAll('.select-bundle').forEach(button => {
+            button.addEventListener('click', function() {
+                const bundleName = this.getAttribute('data-bundle');
+                const bundlePrice = this.getAttribute('data-price');
+                
+                document.getElementById('selectedBundle').value = bundleName;
+                document.getElementById('bundlePrice').value = '$' + bundlePrice;
+                
+                // Scroll to form
+                document.getElementById('purchaseForm').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Payment Method Selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                // Remove active class from all methods
+                document.querySelectorAll('.payment-method').forEach(m => {
+                    m.classList.remove('active');
+                });
+                
+                // Add active class to clicked method
+                this.classList.add('active');
+                
+                // Update form fields based on payment method
+                const methodType = this.getAttribute('data-method');
+                updatePaymentFields(methodType);
+            });
+        });
+
+        function updatePaymentFields(method) {
+            const cardNumberField = document.getElementById('cardNumber');
+            const expiryField = document.getElementById('expiryDate');
+            const cvvField = document.getElementById('cvv');
+            
+            if (method === 'credit-card') {
+                cardNumberField.placeholder = '1234 5678 9012 3456';
+                expiryField.placeholder = 'MM/YY';
+                cvvField.placeholder = '123';
+                
+                cardNumberField.parentElement.style.display = 'block';
+                expiryField.parentElement.parentElement.style.display = 'flex';
+            } else if (method === 'paypal') {
+                cardNumberField.placeholder = 'PayPal Email';
+                cardNumberField.parentElement.style.display = 'block';
+                expiryField.parentElement.parentElement.style.display = 'none';
+            } else if (method === 'mobile-money') {
+                cardNumberField.placeholder = 'Mobile Money Number';
+                cardNumberField.parentElement.style.display = 'block';
+                expiryField.parentElement.parentElement.style.display = 'none';
+            }
+        }
+
+        // Form Submission
+        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const selectedBundle = document.getElementById('selectedBundle').value;
+            const bundlePrice = document.getElementById('bundlePrice').value;
+            
+            // Validate that a bundle is selected
+            if (!selectedBundle) {
+                alert('Please select a data bundle first.');
+                return;
+            }
+            
+            // Show success notification
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            document.getElementById('selectedBundle').value = '';
+            document.getElementById('bundlePrice').value = '';
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+            
+            // In a real application, you would send the data to a server here
+            console.log('Purchase Details:', {
+                phoneNumber,
+                selectedBundle,
+                bundlePrice
+            });
+        });
+
+        // Initialize with credit card as default
+        updatePaymentFields('credit-card');
+    </script>
+</body>
+</html>
