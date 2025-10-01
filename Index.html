@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink & White Flip Ticket</title>
+    <link rel="stylesheet" href=" Styles.css">
+   
+</head>
+<body>
+    <div class="ticket-container">
+        <div class="ticket" id="ticket">
+            <!-- Front of the ticket -->
+            <div class="ticket-front">
+                <div class="header">
+                    <h1>PREMIUM ACCESS</h1>
+                    <p>Luxe Experience Pass</p>
+                    <div class="logo">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                
+                <div class="event-details">
+                    <h2 class="event-title">Blossom Music Festival</h2>
+                    
+                    <div class="detail-row">
+                        <div class="detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="detail-text">
+                            <h3>DATE</h3>
+                            <p>June 12-14, 2023</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <div class="detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="detail-text">
+                            <h3>TIME</h3>
+                            <p>2:00 PM - 11:00 PM Daily</p>
+                        </div>
+                    </div>
+                    
+                    <div class="venue">
+                        <h3>VENUE</h3>
+                        <p>Rosewood Gardens</p>
+                        <p>456 Park Avenue, Los Angeles, CA</p>
+                    </div>
+                    
+                    <div class="ticket-info">
+                        <div class="info-box">
+                            <div class="info-label">ADMIT</div>
+                            <div class="info-value">1 PERSON</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">TYPE</div>
+                            <div class="info-value">VIP</div>
+                        </div>
+                    </div>
+                    
+                    <div class="perforation"></div>
+                    
+                    <div class="barcode-container">
+                        <div class="barcode">A1B2C3D4E5F6G7H8I9J0</div>
+                        <div class="ticket-number">TICKET #: BF2023-VIP-7294</div>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="flip-hint">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Click to view event details</span>
+                    </div>
+                </div>
+                
+                <!-- Decorative corners -->
+                <div class="corner-decoration corner-top-left"></div>
+                <div class="corner-decoration corner-top-right"></div>
+                <div class="corner-decoration corner-bottom-left"></div>
+                <div class="corner-decoration corner-bottom-right"></div>
+            </div>
+            
+            <!-- Back of the ticket -->
+            <div class="ticket-back">
+                <div class="header">
+                    <h1>EVENT INFORMATION</h1>
+                    <p>Terms & Conditions</p>
+                    <div class="logo">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                </div>
+                
+                <div class="back-content">
+                    <h2 class="back-title">Blossom Music Festival</h2>
+                    
+                    <div class="terms-section">
+                        <h3>ENTRY REQUIREMENTS</h3>
+                        <ul class="terms-list">
+                            <li><i class="fas fa-check-circle"></i> This ticket is non-transferable and non-refundable</li>
+                            <li><i class="fas fa-check-circle"></i> Valid photo ID required for entry</li>
+                            <li><i class="fas fa-check-circle"></i> Must be 18+ to attend</li>
+                            <li><i class="fas fa-check-circle"></i> Gates open at 1:30 PM each day</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3>VENUE INFORMATION</h3>
+                        <ul class="terms-list">
+                            <li><i class="fas fa-check-circle"></i> Free Wi-Fi available throughout the venue</li>
+                            <li><i class="fas fa-check-circle"></i> Food and beverage vendors on site</li>
+                            <li><i class="fas fa-check-circle"></i> Parking available in Lot C</li>
+                            <li><i class="fas fa-check-circle"></i> Accessibility services available</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Venue Map & Directions</span>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div>
+                            <p><strong>Event Hotline:</strong> (555) 123-4567</p>
+                        </div>
+                        <div>
+                            <p><strong>Email:</strong> info@blossomfest.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="flip-hint">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Click to return to ticket</span>
+                    </div>
+                </div>
+                
+                <!-- Decorative corners -->
+                <div class="corner-decoration corner-top-left"></div>
+                <div class="corner-decoration corner-top-right"></div>
+                <div class="corner-decoration corner-bottom-left"></div>
+                <div class="corner-decoration corner-bottom-right"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticket = document.getElementById('ticket');
+            
+            ticket.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+            
+            // Add a subtle hover effect
+            ticket.addEventListener('mouseenter', function() {
+                if(!this.classList.contains('flipped')) {
+                    this.style.transform = 'translateY(-5px)';
+                }
+            });
+            
+            ticket.addEventListener('mouseleave', function() {
+                if(!this.classList.contains('flipped')) {
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
